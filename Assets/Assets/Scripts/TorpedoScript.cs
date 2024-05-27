@@ -5,20 +5,18 @@ using UnityEngine;
 public class TorpedoScript : MonoBehaviour
 {
     [SerializeField]private float torpedoSpeed;
-    private int dir =-1;
+    Rigidbody2D rigidBody2D;
 
-    void Update()
+    void Start()
     {
-        transform.Translate( 0, dir * torpedoSpeed * Time.deltaTime, 0);
+        rigidBody2D = GetComponent<Rigidbody2D>();  
+        rigidBody2D.velocity = Vector2.down * Time.deltaTime*torpedoSpeed;  
+        Invoke("DestroyTorpedo",8f);
     }
 
-    private void OnTriggerEnter2D(Collider2D other) {
-        if(other.gameObject.CompareTag("Boundary"))
-        {
-            Destroy(gameObject);
-            Debug.Log("Torpedo");
-        }
+    private void DestroyTorpedo()
+    {
+        Destroy(gameObject);
     }
-
 
 }

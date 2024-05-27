@@ -11,7 +11,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioSource soundEffect;
     [SerializeField] private AudioSource soundMusic;
     [SerializeField] private bool IsMute = false;
-    [SerializeField] private float Volume = 1f;
+    // [SerializeField] private float Volume = 1f;
     [SerializeField] private SoundType[] sounds;
     private void Awake()
     {

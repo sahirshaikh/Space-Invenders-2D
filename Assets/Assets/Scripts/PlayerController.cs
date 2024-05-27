@@ -12,7 +12,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField]private GameUIController gameUIController;
     private void Update()
     {
-
         PlayerMovement();
 
         if(Input.GetMouseButtonDown(0))
@@ -26,7 +25,6 @@ public class PlayerController : MonoBehaviour
     {
         var dir = new Vector2(Input.GetAxis("Horizontal"),0);
         transform.Translate(dir*speed*Time.deltaTime);
-
     }
 
     private void BulletFire()

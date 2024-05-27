@@ -7,53 +7,47 @@ public class BunkerScript : MonoBehaviour
 {
 
     [SerializeField] private int bunkerScore;
-    // [SerializeField] private TextMeshProUGUI ScoreUI;
-    [SerializeField] private TextMeshPro ScoreUI;
+    [SerializeField] private TextMeshPro scoreUI;
 
     void Start()
     {
-        RefreshUI(0);
-       
+        BunkerAttack(0);      
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.GetComponent<BulletScript>() != null)
+        if((collision.GetComponent<BulletScript>() != null)||(collision.GetComponent<EnemyBullets>()!=null))
         {
             Destroy(collision.gameObject);
-
-            RefreshUI(1);
-            Debug.Log("Impact");
-
+            BunkerAttack(1);
         }
-
         else if(collision.GetComponent<TorpedoScript>()!=null)
         {
-            RefreshUI(2);
+            BunkerAttack(2);
             Destroy(collision.gameObject);
-
-        }
-        else if(collision.GetComponent<EnemyBullets>()!=null)
-        {
-            RefreshUI(1);
-            Destroy(collision.gameObject);
-
         }
         
     }
-
-    public void RefreshUI(int BC)
+    public void BunkerAttack(int value)
     {
-        bunkerScore -=BC;
-
-        ScoreUI.text = bunkerScore+"";
-        if (bunkerScore <= 0)
+        if (bunkerScore > 0)
         {
-            Destroybunker();
+            bunkerScore -=value;
+
+            if(bunkerScore<=0)
+                {
+                    bunkerScore=0;
+                    DestroyBunker();
+                }
+            RefreshUI();
         }
     }
 
-    public void Destroybunker()
+    public void RefreshUI()
+    {
+        scoreUI.text = bunkerScore+"";
+    }
+    public void DestroyBunker()
     {
         Destroy(gameObject);
     }

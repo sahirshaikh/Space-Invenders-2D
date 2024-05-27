@@ -7,18 +7,14 @@ using UnityEngine.SceneManagement;
 public class LobbyUIController : MonoBehaviour
 {
 
-    [SerializeField] private GameObject StartUI;
-    [SerializeField] private string LevelName;
-
-
+    [SerializeField] private GameObject startUI;
+    [SerializeField] private string levelName;
     public void PlayButton()
     {
         SoundManager.Instance.Play(SoundManager.Sounds.onclick);
         Debug.Log("Game Started");
-        SceneManager.LoadScene(LevelName);
+        SceneManager.LoadScene(levelName);
     }
-    
-
     public void QuitButton()
     {
         SoundManager.Instance.Play(SoundManager.Sounds.onclick);

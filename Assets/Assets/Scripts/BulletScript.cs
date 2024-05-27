@@ -8,38 +8,21 @@ public class BulletScript : MonoBehaviour
     [SerializeField] private float bulletSpeed;
     void Start()
     {
-        rigidBody2D = GetComponent<Rigidbody2D>();
-        
+        rigidBody2D = GetComponent<Rigidbody2D>();  
+        rigidBody2D.velocity = Vector2.up * Time.deltaTime*bulletSpeed;  
+        Invoke("DestroyBullet",4f);      
     }
 
-    void Update()
-    {
-        rigidBody2D.velocity = Vector2.up * Time.deltaTime*bulletSpeed;
-
-        Invoke("Destroybullet",4f);      
-    }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        if(other.GetComponent<EnemyBullets>()!=null)
+        if((other.GetComponent<EnemyBullets>()!=null)||(other.GetComponent<TorpedoScript>() != null))
         {
             Destroy(other.gameObject);
             Destroy(gameObject);
-
-        }
-        else if(other.gameObject.CompareTag("BulletDestroy"))
-        {
-            Destroy(gameObject);
-        }
-        else if(other.GetComponent<TorpedoScript>() != null)
-        {
-            Destroy(other.gameObject);
-            Destroy(gameObject);
-
         }
     }
-    private void Destroybullet()
+    private void DestroyBullet()
     {
         Destroy(gameObject);
-
     }
 }

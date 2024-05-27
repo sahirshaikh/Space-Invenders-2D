@@ -5,20 +5,18 @@ using UnityEngine;
 public class EnemyBullets : MonoBehaviour
 {
     [SerializeField]private float bulletSpeed;
+    Rigidbody2D rigidBody2D;
 
-    private int dir =-1;
-
-    void Update()
+    void Start()
     {
-        transform.Translate( 0, dir * bulletSpeed * Time.deltaTime, 0);
+        rigidBody2D = GetComponent<Rigidbody2D>();  
+        rigidBody2D.velocity = Vector2.down * Time.deltaTime*bulletSpeed;  
+        Invoke("DestroyBullets",8f);
     }
 
-    private void OnTriggerEnter2D(Collider2D other) {
-        if(other.gameObject.CompareTag("Boundary"))
-        {
-            Destroy(gameObject);
-            Debug.Log("Enemy Bullet");
-        }
+    private void DestroyBullets()
+    {
+        Destroy(gameObject);
     }
 
 }

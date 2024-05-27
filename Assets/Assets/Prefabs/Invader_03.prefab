@@ -165,5 +165,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b65cee144eee754bb76be8155fc22d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PointScore: 30
+  pointScore: 30
   gameUIController: {fileID: 0}
