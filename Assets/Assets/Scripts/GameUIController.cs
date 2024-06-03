@@ -6,53 +6,53 @@ using UnityEngine.SceneManagement;
 
 public class GameUIController : MonoBehaviour
 {
-    [SerializeField] private GameObject PauseUI;
-    [SerializeField] private GameObject GameoverUI;
-    [SerializeField] private GameObject GamewonUI;
+    [SerializeField] private GameObject pauseUI;
+    [SerializeField] private GameObject gameOverUI;
+    [SerializeField] private GameObject gameWonUI;
     [SerializeField] private GameObject player;
-    [SerializeField] private GameObject Invaders;
-    [SerializeField] private GameObject Mystyship;
-    [SerializeField] private TextMeshProUGUI PointScoreUI;
-    [SerializeField] private TextMeshProUGUI LifeScoreUI;
+    [SerializeField] private GameObject invaders;
+    [SerializeField] private GameObject mystyship;
+    [SerializeField] private TextMeshProUGUI pointScoreUI;
+    [SerializeField] private TextMeshProUGUI lifeScoreUI;
+    [SerializeField] private GameObject spaceShipText;
     [SerializeField] private int life;
-    [SerializeField] private SpaceshipScript spaceshipScript;
+    [SerializeField] private Spaceship spaceshipScript;
     private int score=0;
-    private bool Pause=false;
-    private GameObject Enemy;
+    private bool pause=false;
+    private GameObject enemy;
     [SerializeField] private PlayerController playerController;
+    [SerializeField] private List<GameObject> invadersList = new List<GameObject>();
+    [SerializeField] private string lobbyScene;
 
     void Start()
      {
         RefreshScoreUI(0);
         RefreshLifeUI(0);
      }
-
-
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-            if(Pause==false)
+            if(pause==false)
             {
                 PauseGame();
-                PauseUI.SetActive(true);
-                Pause=true;
+                pauseUI.SetActive(true);
+                pause=true;
             }
             else
             {
                 ResumeGame();
-                PauseUI.SetActive(false);
-                Pause=false;
+                pauseUI.SetActive(false);
+                pause=false;
             }
         }
 
-            Enemy = GameObject.FindWithTag("Enemy");
-            if(Enemy==null)
-            {
+        invadersList.RemoveAll(s => s == null);
+        if(invadersList.Count==0)
+        {
                 spaceshipScript.InvadersDeath();
-                Debug.Log("ALl Invaders Death");
-
-            }
+                spaceShipText.SetActive(true);
+        }
     }
 
     public void QuitButton()
@@ -65,8 +65,8 @@ public class GameUIController : MonoBehaviour
     public void ResumeButton()
     {
         SoundManager.Instance.Play(SoundManager.Sounds.onclick);
-        PauseUI.SetActive(false);
-        Pause=false;
+        pauseUI.SetActive(false);
+        pause=false;
         ResumeGame();
     }
 
@@ -79,14 +79,18 @@ public class GameUIController : MonoBehaviour
     public void LobbyLoading()
     {
         SoundManager.Instance.Play(SoundManager.Sounds.onclick);
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(lobbyScene);
     }
 
     public void RefreshScoreUI(int sc)
     {
         score+=sc;
+        RefreshScoreUIScore(score);
+    }
 
-        PointScoreUI.text = "Score " + score;
+    public void RefreshScoreUIScore(int score)
+    {
+        pointScoreUI.text = "Score " + score;
     }
 
         public void RefreshLifeUI(int lifedecrease)
@@ -98,51 +102,43 @@ public class GameUIController : MonoBehaviour
             PauseGame();
             playerController.PlayerExplosion();           
             Invoke("GameOverUI",2f);
-            LifeScoreUI.text = "Life " + 0f;
+            RefreshLifeUIScore(0);
         }
         else {
-            SoundManager.Instance.Play(SoundManager.Sounds.PlayerHit);
-
-            LifeScoreUI.text = "Life " + life;
+            RefreshLifeUIScore(life);
         }
+    }
 
+    public void RefreshLifeUIScore(int score)
+    {
+        lifeScoreUI.text = "Life " + life;
     }
 
     public void GameOverUI()
     {
-        GameoverUI.SetActive(true);
+        gameOverUI.SetActive(true);
     }
-
         public void GameWonUI()
     {
         PauseGame();
         Invoke("GameWonUIActive",2f);
-
-
     }
 
     private void GameWonUIActive()
     {
-        GamewonUI.SetActive(true);
+        gameWonUI.SetActive(true);
     }
-
-
     public void PauseGame()
     {
         player.GetComponent<PlayerController>().enabled = false;
-        Invaders.GetComponent<InvadersMove>().enabled = false;
-        Mystyship.GetComponent<SpaceshipScript>().enabled = false;
-
-
+        invaders.GetComponent<InvadersMove>().enabled = false;
+        mystyship.GetComponent<Spaceship>().enabled = false;
     }
 
     public void ResumeGame()
     {
         player.GetComponent<PlayerController>().enabled = true;
-        Invaders.GetComponent<InvadersMove>().enabled = true;
-        Mystyship.GetComponent<SpaceshipScript>().enabled = true;
-
+        invaders.GetComponent<InvadersMove>().enabled = true;
+        mystyship.GetComponent<Spaceship>().enabled = true;
     }
-
-
 }
