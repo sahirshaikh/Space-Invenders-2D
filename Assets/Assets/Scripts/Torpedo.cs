@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TorpedoScript : MonoBehaviour
+public class Torpedo : MonoBehaviour
 {
     [SerializeField]private float torpedoSpeed;
     Rigidbody2D rigidBody2D;

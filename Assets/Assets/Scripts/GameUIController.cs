@@ -16,12 +16,13 @@ public class GameUIController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI lifeScoreUI;
     [SerializeField] private GameObject spaceShipText;
     [SerializeField] private int life;
-    [SerializeField] private SpaceshipScript spaceshipScript;
+    [SerializeField] private Spaceship spaceshipScript;
     private int score=0;
     private bool pause=false;
     private GameObject enemy;
     [SerializeField] private PlayerController playerController;
     [SerializeField] private List<GameObject> invadersList = new List<GameObject>();
+    [SerializeField] private string lobbyScene;
 
     void Start()
      {
@@ -78,7 +79,7 @@ public class GameUIController : MonoBehaviour
     public void LobbyLoading()
     {
         SoundManager.Instance.Play(SoundManager.Sounds.onclick);
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(lobbyScene);
     }
 
     public void RefreshScoreUI(int sc)
@@ -131,13 +132,13 @@ public class GameUIController : MonoBehaviour
     {
         player.GetComponent<PlayerController>().enabled = false;
         invaders.GetComponent<InvadersMove>().enabled = false;
-        mystyship.GetComponent<SpaceshipScript>().enabled = false;
+        mystyship.GetComponent<Spaceship>().enabled = false;
     }
 
     public void ResumeGame()
     {
         player.GetComponent<PlayerController>().enabled = true;
         invaders.GetComponent<InvadersMove>().enabled = true;
-        mystyship.GetComponent<SpaceshipScript>().enabled = true;
+        mystyship.GetComponent<Spaceship>().enabled = true;
     }
 }

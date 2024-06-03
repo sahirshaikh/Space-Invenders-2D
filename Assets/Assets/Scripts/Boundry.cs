@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class BoundryScript : MonoBehaviour
+public class Boundry : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D other) {
-        if((other.GetComponent<BulletScript>() != null)||(other.GetComponent<EnemyBullets>()!=null)||(other.GetComponent<TorpedoScript>()!=null))
+        if((other.GetComponent<PlayerBullet>() != null)||(other.GetComponent<EnemyBullet>()!=null)||(other.GetComponent<Torpedo>()!=null))
         {
             Destroy(other.gameObject);
         }

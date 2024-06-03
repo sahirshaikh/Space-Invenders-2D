@@ -40,9 +40,8 @@ public class InvadersMove : MonoBehaviour
             instantiationTimer = fixedTimer;
         }
     }
-
     private void OnCollisionEnter2D(Collision2D other) {
-     if (other.gameObject.GetComponent<BoundryScript>()!=null)
+     if (other.gameObject.GetComponent<Boundry>()!=null)
         {
             dir=-dir;
             transform.Translate(0,invaderVericalMovement *-1* Time.deltaTime,0);

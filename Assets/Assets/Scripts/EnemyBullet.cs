@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyBullets : MonoBehaviour
+public class EnemyBullet : MonoBehaviour
 {
     [SerializeField]private float bulletSpeed;
     Rigidbody2D rigidBody2D;

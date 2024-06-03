@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletScript : MonoBehaviour
+public class PlayerBullet : MonoBehaviour
 {
      Rigidbody2D rigidBody2D;
     [SerializeField] private float bulletSpeed;
@@ -15,7 +15,7 @@ public class BulletScript : MonoBehaviour
 
 
     private void OnTriggerEnter2D(Collider2D other) {
-        if((other.GetComponent<EnemyBullets>()!=null)||(other.GetComponent<TorpedoScript>() != null))
+        if((other.GetComponent<EnemyBullet>()!=null)||(other.GetComponent<Torpedo>() != null))
         {
             Destroy(other.gameObject);
             Destroy(gameObject);

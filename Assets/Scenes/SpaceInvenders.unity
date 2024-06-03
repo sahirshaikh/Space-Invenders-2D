@@ -911,6 +911,8 @@ MonoBehaviour:
   bulletPos: {fileID: 541220854}
   explosion: {fileID: 3306280147568979629, guid: c0925b7a8a7c0aa468705502922a20ee, type: 3}
   gameUIController: {fileID: 1443725079}
+  torpedoHit: 2
+  enemyBulletHit: 1
 --- !u!50 &432778218
 Rigidbody2D:
   serializedVersion: 4
@@ -3912,6 +3914,7 @@ MonoBehaviour:
   - {fileID: 627226569}
   - {fileID: 1739246760}
   - {fileID: 100122390}
+  lobbyScene: Lobby
 --- !u!4 &1443725080
 Transform:
   m_ObjectHideFlags: 0
@@ -5042,8 +5045,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 982415674}
     - target: {fileID: 7068965379057327861, guid: 001a9aaaf40fc454bac55b20e6c5a1c3, type: 3}
+      propertyPath: torpedoHit
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7068965379057327861, guid: 001a9aaaf40fc454bac55b20e6c5a1c3, type: 3}
       propertyPath: bunkerScore
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7068965379057327861, guid: 001a9aaaf40fc454bac55b20e6c5a1c3, type: 3}
+      propertyPath: playerEnemyBulletHit
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5688,8 +5699,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 528278520}
     - target: {fileID: 7068965379057327861, guid: 001a9aaaf40fc454bac55b20e6c5a1c3, type: 3}
+      propertyPath: torpedoHit
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7068965379057327861, guid: 001a9aaaf40fc454bac55b20e6c5a1c3, type: 3}
       propertyPath: bunkerScore
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7068965379057327861, guid: 001a9aaaf40fc454bac55b20e6c5a1c3, type: 3}
+      propertyPath: playerEnemyBulletHit
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

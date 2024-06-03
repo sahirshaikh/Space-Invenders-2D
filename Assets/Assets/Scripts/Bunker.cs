@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class BunkerScript : MonoBehaviour
+public class Bunker : MonoBehaviour
 {
 
     [SerializeField] private int bunkerScore;
     [SerializeField] private TextMeshPro scoreUI;
+    [SerializeField] private int playerEnemyBulletHit;
+    [SerializeField] private int torpedoHit;
 
     void Start()
     {
@@ -16,14 +18,14 @@ public class BunkerScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if((collision.GetComponent<BulletScript>() != null)||(collision.GetComponent<EnemyBullets>()!=null))
+        if((collision.GetComponent<PlayerBullet>() != null)||(collision.GetComponent<EnemyBullet>()!=null))
         {
             Destroy(collision.gameObject);
-            BunkerAttack(1);
+            BunkerAttack(playerEnemyBulletHit);
         }
-        else if(collision.GetComponent<TorpedoScript>()!=null)
+        else if(collision.GetComponent<Torpedo>()!=null)
         {
-            BunkerAttack(2);
+            BunkerAttack(torpedoHit);
             Destroy(collision.gameObject);
         }
         

@@ -100,7 +100,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bunkerScore: 10
-  ScoreUI: {fileID: 2808037709994590250}
+  scoreUI: {fileID: 0}
+  playerEnemyBulletHit: 1
+  torpedoHit: 2
 --- !u!61 &3104630754457941332
 BoxCollider2D:
   m_ObjectHideFlags: 0

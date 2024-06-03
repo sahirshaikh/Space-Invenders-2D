@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject bulletPos;
     [SerializeField] private GameObject explosion;
     [SerializeField]private GameUIController gameUIController;
+    [SerializeField] private int torpedoHit;
+    [SerializeField] private int enemyBulletHit;
     private void Update()
     {
         PlayerMovement();
@@ -34,17 +36,17 @@ public class PlayerController : MonoBehaviour
     }
 
         private void OnTriggerEnter2D(Collider2D other) {
-        if(other.gameObject.GetComponent<TorpedoScript>()!=null)
+        if(other.gameObject.GetComponent<Torpedo>()!=null)
         {
             SoundManager.Instance.Play(SoundManager.Sounds.PlayerHit);
-            gameUIController.RefreshLifeUI(2);
+            gameUIController.RefreshLifeUI(torpedoHit);
             Destroy(other.gameObject);
         }
 
-        else if(other.gameObject.GetComponent<EnemyBullets>()!=null)
+        else if(other.gameObject.GetComponent<EnemyBullet>()!=null)
         {
             SoundManager.Instance.Play(SoundManager.Sounds.PlayerHit);
-            gameUIController.RefreshLifeUI(1);
+            gameUIController.RefreshLifeUI(enemyBulletHit);
             Destroy(other.gameObject);
         }
     }

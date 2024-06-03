@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class SpaceshipScript : MonoBehaviour
+public class Spaceship : MonoBehaviour
 {
     [SerializeField] private float spaceshipSpeed;
     private float dir=1;
@@ -41,7 +41,7 @@ public class SpaceshipScript : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
-        if (other.gameObject.GetComponent<BoundryScript>()!=null)
+        if (other.gameObject.GetComponent<Boundry>()!=null)
         {
             dir=-dir;
         }       
@@ -52,7 +52,7 @@ public class SpaceshipScript : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        if(other.gameObject.GetComponent<BulletScript>()!=null)
+        if(other.gameObject.GetComponent<PlayerBullet>()!=null)
         {
             if(invadersDeath==true)
             {
